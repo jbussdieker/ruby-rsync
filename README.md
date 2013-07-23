@@ -1,29 +1,17 @@
 # Rsync
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'rsync'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install rsync
+Ruby/Rsync is a Ruby library that can syncronize files between remote hosts by wrapping a call to the rsync binary.
 
 ## Usage
 
-TODO: Write usage instructions here
+    require "rsync"
 
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+    Rsync.command(["/path/to/source", "/path/to/destination"]) do |result|
+      if result.success?
+        result.changes.each do |change|
+          puts "#{change.filename} (#{change.summary})"
+        end
+      else
+        puts result.error
+      end
+    end
