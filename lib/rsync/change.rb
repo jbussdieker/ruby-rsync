@@ -56,15 +56,15 @@ module Rsync
       end
 
       def raw_update_type
-        @raw[0]
+        @raw[0,1]
       end
 
       def raw_file_type
-        @raw[1]
+        @raw[1,1]
       end
 
       def attribute_prop(index)
-        case @raw[index]
+        case @raw[index,1]
           when '.'
             :no_change
           when ' '
