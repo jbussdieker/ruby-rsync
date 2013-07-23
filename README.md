@@ -1,5 +1,7 @@
 # Rsync
 
+[![Build Status](https://travis-ci.org/jbussdieker/ruby-rsync.png?branch=master)](https://travis-ci.org/jbussdieker/ruby-rsync)
+
 Ruby/Rsync is a Ruby library that can syncronize files between remote hosts by wrapping a call to the rsync binary.
 
 ## Usage
@@ -15,3 +17,4 @@ Ruby/Rsync is a Ruby library that can syncronize files between remote hosts by w
         puts result.error
       end
     end
+
