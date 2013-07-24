@@ -22,14 +22,11 @@ module Rsync
     # Whether the file was changed or not.
     # @return [Boolean]
     def changed?
-      if update_type == :message
-        return true
-      elsif update_type == :recv
-        return true
-      elsif update_type == :change
-        return true
+      if update_type == :no_change
+        false
+      else
+        true
       end
-      false
     end
 
     # Simple description of the change.
@@ -38,13 +35,16 @@ module Rsync
       if update_type == :message
         message
       elsif update_type == :recv and @data[2,9] == "+++++++++"
-        "creating"
+        "creating local"
       elsif update_type == :recv
-        "updating"
+        "updating local"
+      elsif update_type == :sent and @data[2,9] == "+++++++++"
+        "creating remote"
+      elsif update_type == :sent
+        "updating remote"
       else
         changes = []
-        #[:checksum, :size, :timestamp, :permissions, :owner, :group, :acl].each do |prop|
-        [:checksum, :size, :permissions, :owner, :group, :acl].each do |prop|
+        [:checksum, :size, :timestamp, :permissions, :owner, :group, :acl].each do |prop|
           changes << prop if send(prop) == :changed
         end
         changes.join(", ")
