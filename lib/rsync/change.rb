@@ -26,6 +26,8 @@ module Rsync
         return true
       elsif update_type == :recv
         return true
+      elsif update_type == :change
+        return true
       end
       false
     end
