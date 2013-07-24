@@ -1,16 +1,22 @@
 require 'rsync/change'
 
 module Rsync
+  # The result of a sync.
   class Result
+    # @!visibility private
     def initialize(raw, exitcode)
       @raw = raw
       @exitcode = exitcode
     end
 
+    # Whether the rsync job was run without errors.
+    # @return Boolean
     def success?
       @exitcode.to_i == 0
     end
 
+    # The error message based on exit code.
+    # @return String
     def error
       case @exitcode.exitstatus
         when 0 
@@ -58,8 +64,19 @@ module Rsync
       end
     end
 
+    # List of changes made during this run.
+    #
+    # @return {Array<Change>}
     def changes
-      Change.new(@raw)
+      list = []
+      @raw.split("\n").each do |line|
+        #if line =~ /^([<>ch.*][fdLDS][ .+\?cstTpoguax]{9}) (.*)$/
+        if line =~ /^([<>ch.\*].{10}) (.*)$/
+          detail = Change.new(line)
+          list << detail if detail.changed?
+        end
+      end
+      list
     end
   end
 end
