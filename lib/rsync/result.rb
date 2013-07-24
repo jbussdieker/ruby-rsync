@@ -10,15 +10,15 @@ module Rsync
     end
 
     # Whether the rsync job was run without errors.
-    # @return Boolean
+    # @return {Boolean}
     def success?
       @exitcode.to_i == 0
     end
 
     # The error message based on exit code.
-    # @return String
+    # @return {String}
     def error
-      case @exitcode.exitstatus
+      case @exitcode.to_i
         when 0 
           "Success"
         when 1
@@ -68,10 +68,16 @@ module Rsync
     #
     # @return {Array<Change>}
     def changes
+      change_list
+    end
+
+private
+
+    def change_list
       list = []
       @raw.split("\n").each do |line|
         #if line =~ /^([<>ch.*][fdLDS][ .+\?cstTpoguax]{9}) (.*)$/
-        if line =~ /^([<>ch.\*].{10}) (.*)$/
+        if line =~ /^([<>ch\.\*].{10}) (.*)$/
           detail = Change.new(line)
           list << detail if detail.changed?
         end
