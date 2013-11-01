@@ -32,19 +32,19 @@ describe Rsync do
     end
   end
 
-  xit "should work" do
+  it "should work" do
     @src.mkdir("blah")
     Rsync.run(@src.path + "/", @dest.path, ["-a"])
     @dest.should eql(@src)
   end
 
-  xit "should dry run" do
+  it "should dry run" do
     @src.mkdir("blah")
     Rsync.run(@src.path + "/", @dest.path, ["-a", "-n"])
     @dest.should_not eql(@src)
   end
 
-  xit "should list changes" do
+  it "should list changes" do
     @src.mkdir("blah")
     result = Rsync.run(@src.path + "/", @dest.path, ["-a"])
     result.should be_success
