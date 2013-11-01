@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'rsync'
-require_relative '../lib/rsync/command'
 
 describe Rsync do
 
