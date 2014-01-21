@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/jbussdieker/ruby-rsync.png?branch=master)](https://travis-ci.org/jbussdieker/ruby-rsync)
 [![Code Climate](https://codeclimate.com/github/jbussdieker/ruby-rsync.png)](https://codeclimate.com/github/jbussdieker/ruby-rsync)
 [![Gem Version](https://badge.fury.io/rb/rsync.png)](http://badge.fury.io/rb/rsync)
+[![Coverage Status](https://coveralls.io/repos/jbussdieker/ruby-rsync/badge.png)](https://coveralls.io/r/jbussdieker/ruby-rsync)
 
 Ruby/Rsync is a Ruby library that can syncronize files between remote hosts by wrapping a call to the rsync binary.
 
