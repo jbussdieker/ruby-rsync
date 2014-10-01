@@ -3,6 +3,9 @@ require 'rsync/change'
 module Rsync
   # The result of a sync.
   class Result
+    # Exit code returned by rsync
+    attr_accessor :exitcode
+
     # Error messages by exit code
     ERROR_CODES = {
       "0" => "Success",
