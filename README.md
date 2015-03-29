@@ -12,22 +12,22 @@ Ruby/Rsync is a Ruby library that can syncronize files between remote hosts by w
 
 Minimal example
 ```ruby
-    require "rsync"
+require "rsync"
 
-    result = Rsync.run("/path/to/src", "/path/to/dest")
+result = Rsync.run("/path/to/src", "/path/to/dest")
 ```
 
 Complete example
 ```ruby
-    require "rsync"
+require "rsync"
 
-    Rsync.run("/path/to/src", "/path/to/dest") do |result|
-      if result.success?
-        result.changes.each do |change|
-          puts "#{change.filename} (#{change.summary})"
-        end
-      else
-        puts result.error
-      end
+Rsync.run("/path/to/src", "/path/to/dest") do |result|
+  if result.success?
+    result.changes.each do |change|
+      puts "#{change.filename} (#{change.summary})"
     end
+  else
+    puts result.error
+  end
+end
 ```
