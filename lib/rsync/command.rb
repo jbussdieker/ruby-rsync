@@ -6,8 +6,16 @@ module Rsync
     # @param args {Array}
     # @return {Result}
     def self.run(*args)
-      output = run_command("rsync --itemize-changes #{args.join(" ")}")
+      output = run_command("#{command} --itemize-changes #{args.join(" ")}")
       Result.new(output, $?.exitstatus)
+    end
+
+    def self.command
+      @command ||= "rsync"
+    end
+
+    def self.command=(cmd)
+      @command = cmd
     end
 
 private
