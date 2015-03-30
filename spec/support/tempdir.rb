@@ -9,9 +9,13 @@ class TempDir
   end
 
   def tree
-    #`cd #{@path}; tree -pugAD`
-    #`cd #{@path}; find . -printf "%A@ %p\n"`
-    `cd #{@path}; find . -printf "%p\n"`
+    `which tree`
+    if $?.to_i == 0
+      `cd #{@path}; tree -pugAD`
+    else
+      #`cd #{@path}; find . -printf "%A@ %p\n"`
+      `cd #{@path}; find . -printf "%p\n"`
+    end
   end
 
   def mkdir(path)
