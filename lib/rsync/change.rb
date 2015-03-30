@@ -9,14 +9,19 @@ module Rsync
   #  :unknown
   #  :changed
   class Change
-    def initialize(data)
+    def initialize(data, version = 30)
       @data = data
+      @version = version
     end
 
     # The filename associated with this change.
     # @return [String]
     def filename
-      @data[12..-1]
+      if @version > 29
+        @data[12..-1]
+      else
+        @data[10..-1]
+      end
     end
 
     # Whether the file was changed or not.
@@ -92,13 +97,17 @@ module Rsync
     # The change, if any, to the file ACL.
     # @return [Symbol]
     def acl
-      attribute_prop(9)
+      if @version > 29
+        attribute_prop(9)
+      end
     end
 
     # The change, if any, to the file's extended attributes.
     # @return [Symbol]
     def ext_attr
-      attribute_prop(10)
+      if @version > 29
+        attribute_prop(10)
+      end
     end
 
     # @!endgroup

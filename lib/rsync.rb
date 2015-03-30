@@ -18,4 +18,16 @@ module Rsync
     yield(result) if block_given?
     result
   end
+
+  def self.protocol
+    result = Command.run(nil, nil, "--version")
+    result.instance_eval { @raw }.split("\n").first.match(/protocol version (\d+)/)
+    $1
+  end
+
+  def self.version
+    result = Command.run(nil, nil, "--version")
+    result.instance_eval { @raw }.split("\n").first.match(/(\d+\.\d+\.\d+)/)
+    $1
+  end
 end
