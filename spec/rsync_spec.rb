@@ -11,15 +11,15 @@ describe Rsync do
     end
 
     it "should respond to host" do
-      Rsync.should respond_to(:host) 
-      Rsync.host.should == 'root@127.0.0.1'
+      expect(Rsync).to respond_to(:host) 
+      expect(Rsync.host).to eql('root@127.0.0.1')
     end
 
     describe "run" do
       it "prepend the host to the destination" do
-        Rsync::Command.stub(:run)
+        allow(Rsync::Command).to receive(:run)
+        expect(Rsync::Command).to receive(:run).with('/foo1', 'root@127.0.0.1:/foo2', ["-a"])
         Rsync.run('/foo1', '/foo2', ["-a"])
-        Rsync::Command.should have_received(:run).with('/foo1', 'root@127.0.0.1:/foo2', ["-a"])
       end
     end
   end
@@ -35,20 +35,20 @@ describe Rsync do
   it "should work" do
     @src.mkdir("blah")
     Rsync.run(@src.path + "/", @dest.path, ["-a"])
-    @dest.should eql(@src)
+    expect(@dest).to eql(@src)
   end
 
   it "should dry run" do
     @src.mkdir("blah")
     Rsync.run(@src.path + "/", @dest.path, ["-a", "-n"])
-    @dest.should_not eql(@src)
+    expect(@dest).to_not eql(@src)
   end
 
   it "should list changes" do
     @src.mkdir("blah")
     result = Rsync.run(@src.path + "/", @dest.path, ["-a"])
-    result.should be_success
-    result.changes.length.should eql(1)
-    @dest.should eql(@src)
+    expect(result).to be_success
+    expect(result.changes.length).to eql(1)
+    expect(@dest).to eql(@src)
   end
 end

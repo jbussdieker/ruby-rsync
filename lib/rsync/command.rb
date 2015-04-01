@@ -1,3 +1,5 @@
+require 'rsync/result'
+
 module Rsync
   # An rsync command to be run
   class Command
