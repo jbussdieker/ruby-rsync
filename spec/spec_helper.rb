@@ -15,7 +15,6 @@ RSpec.configure do |spec|
       builder = RsyncBuilder.new(version)
       cmd = builder.build
 
-      puts `#{cmd} --version`
       Rsync::Command.command = cmd
     end
   end

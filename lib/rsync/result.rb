@@ -67,7 +67,10 @@ private
       @raw.split("\n").each do |line|
         #if line =~ /^([<>ch.*][fdLDS][ .+\?cstTpoguax]{9}) (.*)$/
         if line =~ /^([<>ch+\.\*].{10}) (.*)$/
-          detail = Change.new(line)
+          detail = Change.new(line, 30)
+          list << detail if detail.changed?
+        elsif line =~ /^([<>ch+\.\*].{8}) (.*)$/
+          detail = Change.new(line, 29)
           list << detail if detail.changed?
         end
       end
