@@ -1,4 +1,5 @@
 require 'rsync/result'
+require 'shellwords'
 
 module Rsync
   # An rsync command to be run
@@ -8,7 +9,7 @@ module Rsync
     # @param args {Array}
     # @return {Result}
     def self.run(*args)
-      output = run_command("#{command} --itemize-changes #{args.join(" ")}")
+      output = run_command([command, "--itemize-changes", args].flatten.shelljoin)
       Result.new(output, $?.exitstatus)
     end
 
