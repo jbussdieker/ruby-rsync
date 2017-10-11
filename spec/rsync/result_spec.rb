@@ -24,4 +24,12 @@ describe Rsync::Result do
     expect(result.success?).to eql(false)
     expect(result.exitcode).to eql(1)
   end
+
+  it "should handle ssh error" do
+    result = Rsync::Result.new("Permission denied (publickey)", 255)
+    expect(result.changes).to eql([])
+    expect(result.error).to eql("Permission denied (publickey)")
+    expect(result.success?).to eql(false)
+    expect(result.exitcode).to eql(255)
+  end
 end

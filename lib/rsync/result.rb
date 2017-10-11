@@ -48,6 +48,8 @@ module Rsync
       error_key = @exitcode.to_s
       if ERROR_CODES.has_key? error_key
         ERROR_CODES[error_key]
+      elsif @raw =~ /Permission denied \(publickey\)/
+        "Permission denied (publickey)"
       else
         "Unknown Error"
       end
