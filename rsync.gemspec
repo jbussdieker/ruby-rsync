@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Rsync::VERSION
   spec.authors       = ["Joshua Bussdieker"]
   spec.email         = ["jbussdieker@gmail.com"]
-  spec.summary       = %q{Ruby/Rsync is a Ruby library that can syncronize files between remote hosts by wrapping a call to the rsync binary.}
+  spec.summary       = %q{Ruby/Rsync is a Ruby library that can synchronize files between remote hosts by wrapping a call to the rsync binary.}
   spec.homepage      = "http://github.com/jbussdieker/ruby-rsync"
   spec.license       = "MIT"
 
