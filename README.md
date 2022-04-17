@@ -6,18 +6,30 @@
 [![Coverage Status](https://coveralls.io/repos/jbussdieker/ruby-rsync/badge.png)](https://coveralls.io/r/jbussdieker/ruby-rsync)
 [![Dependency Status](https://gemnasium.com/jbussdieker/ruby-rsync.svg)](https://gemnasium.com/jbussdieker/ruby-rsync)
 
-Ruby/Rsync is a Ruby library that can syncronize files between remote hosts by wrapping a call to the rsync binary.
+Ruby/Rsync is a Ruby library that can synchronize files between remote hosts by wrapping a call to the rsync binary.
 
 ## Usage
 
-Minimal example
+The `run` command takes a list of string based arguments that are forwarded to the `rsync binary`. A minimal example would look as follows:
+
 ```ruby
 require "rsync"
 
 result = Rsync.run("/path/to/src", "/path/to/dest")
+
+# rsync /path/to/src /path/to/dest
 ```
 
-Complete example
+If you want, you can supply option flags to the command as well. For example, supplying `-a` option:
+```ruby
+require "rsync"
+
+result = Rsync.run("-a", "/path/to/src", "/path/to/dest")
+# rsync -a /path/to/src /path/to/dest
+```
+
+
+A complete example would look as follows:
 ```ruby
 require "rsync"
 
